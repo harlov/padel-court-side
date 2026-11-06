@@ -1,0 +1,351 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1535F4FC5E77E060A33841EF /* PadelWatch.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4E5700C794EA723FD44DDE54 /* PadelWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4711F314FEEDAC6DC20024F6 /* iPhone/PadelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD43B175A5F3D208C854C0 /* iPhone/PadelApp.swift */; };
+		6C066488E3B094207F70E165 /* Sources/PadelCore/Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */; };
+		9A9A2283D5EF9327B98E2701 /* Watch/PadelWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898993607115D74AE8A72BE8 /* Watch/PadelWatchApp.swift */; };
+		A4626E9603C8150DB41AA007 /* Shared/Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */; };
+		AB49C96AF8BA8BA6B68A7398 /* Shared/MatchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9933291B4A1A21AAB98D1A4D /* Shared/MatchStore.swift */; };
+		B654E7AED34415FC2BE2270B /* Shared/MatchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9933291B4A1A21AAB98D1A4D /* Shared/MatchStore.swift */; };
+		B95D7EB5F07DC3CD67C6AA6D /* Sources/PadelCore/Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */; };
+		DAF8F452D4E6D178BE95F1BF /* Shared/Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		670D34D486D4143501C70D55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1E105F906751137B4F9AABF;
+			remoteInfo = PadelWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CFFF27C96089B93150F3553B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				1535F4FC5E77E060A33841EF /* PadelWatch.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4E5700C794EA723FD44DDE54 /* PadelWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = PadelWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		898993607115D74AE8A72BE8 /* Watch/PadelWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watch/PadelWatchApp.swift; sourceTree = SOURCE_ROOT; };
+		9933291B4A1A21AAB98D1A4D /* Shared/MatchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/MatchStore.swift; sourceTree = SOURCE_ROOT; };
+		ACFD43B175A5F3D208C854C0 /* iPhone/PadelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhone/PadelApp.swift; sourceTree = SOURCE_ROOT; };
+		B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/Scoreboard.swift; sourceTree = SOURCE_ROOT; };
+		BEFC4AC8F5A0AAAFB8D01B92 /* PadelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = PadelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/PadelCore/Match.swift; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2384E913C0475EC44B85F602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		668D2B519C64EA0959F29606 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B28B7AF69320201D1CF206EB = {
+			isa = PBXGroup;
+			children = (
+				D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */,
+				9933291B4A1A21AAB98D1A4D /* Shared/MatchStore.swift */,
+				B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */,
+				ACFD43B175A5F3D208C854C0 /* iPhone/PadelApp.swift */,
+				898993607115D74AE8A72BE8 /* Watch/PadelWatchApp.swift */,
+				FBDC4F23F93125BBEEAE800C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FBDC4F23F93125BBEEAE800C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEFC4AC8F5A0AAAFB8D01B92 /* PadelScore.app */,
+				4E5700C794EA723FD44DDE54 /* PadelWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6C2A417F9FF1BDEE6CB2FC03 /* PadelScore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74DD60BCF56B065B0F0C8E12 /* Build configuration list for PBXNativeTarget "PadelScore" */;
+			buildPhases = (
+				665AA694B557E1866A7C7D6C /* Sources */,
+				668D2B519C64EA0959F29606 /* Frameworks */,
+				26F85DD0389C3DCD3E77126C /* Resources */,
+				CFFF27C96089B93150F3553B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				951D6738C015F691F40A72B0 /* PBXTargetDependency */,
+			);
+			name = PadelScore;
+			productName = PadelScore;
+			productReference = BEFC4AC8F5A0AAAFB8D01B92 /* PadelScore.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C1E105F906751137B4F9AABF /* PadelWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9621503383AFF3E685BD78A /* Build configuration list for PBXNativeTarget "PadelWatch" */;
+			buildPhases = (
+				1D320CEB44D0C3A1C782A73A /* Sources */,
+				2384E913C0475EC44B85F602 /* Frameworks */,
+				F46D6A96DC3FBB767A7CEAB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PadelWatch;
+			productName = PadelWatch;
+			productReference = 4E5700C794EA723FD44DDE54 /* PadelWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2700;
+			};
+			buildConfigurationList = 862894B703A6DEDF96A9DD6C /* Build configuration list for PBXProject "PadelScore" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B28B7AF69320201D1CF206EB;
+			productRefGroup = FBDC4F23F93125BBEEAE800C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6C2A417F9FF1BDEE6CB2FC03 /* PadelScore */,
+				C1E105F906751137B4F9AABF /* PadelWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		26F85DD0389C3DCD3E77126C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F46D6A96DC3FBB767A7CEAB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D320CEB44D0C3A1C782A73A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C066488E3B094207F70E165 /* Sources/PadelCore/Match.swift in Sources */,
+				AB49C96AF8BA8BA6B68A7398 /* Shared/MatchStore.swift in Sources */,
+				A4626E9603C8150DB41AA007 /* Shared/Scoreboard.swift in Sources */,
+				9A9A2283D5EF9327B98E2701 /* Watch/PadelWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665AA694B557E1866A7C7D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B95D7EB5F07DC3CD67C6AA6D /* Sources/PadelCore/Match.swift in Sources */,
+				B654E7AED34415FC2BE2270B /* Shared/MatchStore.swift in Sources */,
+				DAF8F452D4E6D178BE95F1BF /* Shared/Scoreboard.swift in Sources */,
+				4711F314FEEDAC6DC20024F6 /* iPhone/PadelApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		951D6738C015F691F40A72B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C1E105F906751137B4F9AABF /* PadelWatch */;
+			targetProxy = 670D34D486D4143501C70D55 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		25A9DDB8E7FEE40313CB021F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4S2X8MA45;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Court Side";
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.courtside.padelscore;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.courtside.padelscore.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		5A9F07A86BEF733873282A77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4S2X8MA45;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Court Side";
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.courtside.padelscore;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.courtside.padelscore.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		89E1FD6268CC0F221A2BE178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		963B0DFC175B6AADD5EE50C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4S2X8MA45;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Court Side";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.courtside.padelscore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E6DE6C99132752C914FEF632 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FD5975BCFA99D02609F29317 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z4S2X8MA45;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Court Side";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.courtside.padelscore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		74DD60BCF56B065B0F0C8E12 /* Build configuration list for PBXNativeTarget "PadelScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				963B0DFC175B6AADD5EE50C5 /* Debug */,
+				FD5975BCFA99D02609F29317 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		862894B703A6DEDF96A9DD6C /* Build configuration list for PBXProject "PadelScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89E1FD6268CC0F221A2BE178 /* Debug */,
+				E6DE6C99132752C914FEF632 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9621503383AFF3E685BD78A /* Build configuration list for PBXNativeTarget "PadelWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25A9DDB8E7FEE40313CB021F /* Debug */,
+				5A9F07A86BEF733873282A77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}

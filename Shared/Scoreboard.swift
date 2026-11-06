@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreText
 
 extension Team {
     static let palette = ["Ocean", "Amber", "Mint", "Rose", "Violet"]
@@ -44,17 +45,20 @@ struct Scoreboard: View {
         .background(Color.black).foregroundStyle(.white)
     }
     private func panel(_ team: Int) -> some View {
-        GeometryReader { geometry in
+        GeometryReader { _ in
             TimelineView(.animation(minimumInterval: 0.4)) { timeline in
                 let blink = [.pointCelebration, .gamesCelebration].contains(match.phase)
                 let dim = blink && Int(timeline.date.timeIntervalSince1970 * 2.5) % 2 == 0
                 VStack(spacing: 0) {
-                    Text(match.teams[team].name.uppercased()).font(.system(size: 12, weight: .bold, design: .rounded)).lineLimit(1).padding(.top, 10)
-                    Spacer(minLength: 0)
-                    Text(value(team))
-                        .font(.system(size: min(geometry.size.width * 0.65, geometry.size.height * 0.65), weight: .heavy, design: .rounded))
-                        .minimumScaleFactor(0.3).lineLimit(1).monospacedDigit().opacity(dim ? 0.25 : 1)
-                    Spacer(minLength: 0)
+                    Text(match.teams[team].name.uppercased())
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .lineLimit(1).padding(.top, 6)
+                        .fixedSize(horizontal: false, vertical: true)
+                    GeometryReader { _ in
+                        FittedScore(value: value(team))
+                            .padding(4)
+                            .opacity(dim ? 0.25 : 1)
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(match.teams[team].background).foregroundStyle(match.teams[team].foreground)
@@ -81,5 +85,56 @@ struct Scoreboard: View {
             return String(games[team])
         }
         return match.pointLabel(team)
+    }
+}
+
+/// Fit the actual glyph outlines, excluding the font's invisible line spacing.
+/// Uniform scaling preserves the digits' proportions and keeps AD / tie-breaks in bounds.
+private struct FittedScore: View {
+    let value: String
+
+    private var outline: CGPath {
+        let system = CTFontCreateUIFontForLanguage(.system, 100, nil)!
+        let descriptor = CTFontDescriptorCreateCopyWithAttributes(
+            CTFontCopyFontDescriptor(system),
+            [kCTFontTraitsAttribute: [kCTFontWeightTrait: 0.62]] as CFDictionary
+        )
+        let font = CTFontCreateWithFontDescriptor(descriptor, 100, nil)
+        let text = NSAttributedString(string: value, attributes: [
+            NSAttributedString.Key(kCTFontAttributeName as String): font
+        ])
+        let line = CTLineCreateWithAttributedString(text)
+        let result = CGMutablePath()
+        for run in CTLineGetGlyphRuns(line) as! [CTRun] {
+            let count = CTRunGetGlyphCount(run)
+            var glyphs = [CGGlyph](repeating: 0, count: count)
+            var positions = [CGPoint](repeating: .zero, count: count)
+            CTRunGetGlyphs(run, CFRange(location: 0, length: count), &glyphs)
+            CTRunGetPositions(run, CFRange(location: 0, length: count), &positions)
+            for index in 0..<count {
+                if let glyph = CTFontCreatePathForGlyph(font, glyphs[index], nil) {
+                    result.addPath(glyph, transform: CGAffineTransform(
+                        translationX: positions[index].x, y: positions[index].y
+                    ))
+                }
+            }
+        }
+        return result
+    }
+
+    var body: some View {
+        let glyphs = outline
+        Canvas { context, size in
+            let bounds = glyphs.boundingBoxOfPath
+            guard bounds.width > 0, bounds.height > 0 else { return }
+            let scale = min(size.width / bounds.width, size.height / bounds.height)
+            let x = (size.width - bounds.width * scale) / 2
+            let y = (size.height - bounds.height * scale) / 2
+            context.translateBy(x: x, y: y + bounds.height * scale)
+            context.scaleBy(x: scale, y: -scale)
+            context.translateBy(x: -bounds.minX, y: -bounds.minY)
+            context.fill(Path(glyphs), with: .foreground)
+        }
+        .accessibilityHidden(true)
     }
 }

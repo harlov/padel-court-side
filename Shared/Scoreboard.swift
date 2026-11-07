@@ -24,6 +24,7 @@ struct Scoreboard: View {
         case .pointCelebration: return "GAME"
         case .gamesCelebration: return match.score.winner == nil ? "GAMES" : "MATCH WON"
         case .awaitingConfirmation: return "TAP TO START NEXT GAME"
+        case .stopped: return "stoped"
         case .finished: return "\(match.teams[match.score.winner ?? 0].name.uppercased()) WINS"
         }
     }

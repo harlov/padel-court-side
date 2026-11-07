@@ -48,6 +48,6 @@ Watch scoring requires a reachable paired iPhone. Offline scoring is blocked wit
 
 ## Validation
 
-Both simulator app targets build with code signing disabled. Six Swift scoring tests pass. The iPhone app was installed and launched in Simulator, and its home screen was visually checked. App Store icons, provisioning, distribution setup, and a full paired-device acceptance pass remain before release.
+Both simulator app targets build with code signing disabled. Six Swift scoring tests pass. The iPhone app was installed and launched in Simulator, and its home screen was visually checked. Opaque 1024×1024 app icons are configured for both targets. Provisioning, distribution setup, and a full paired-device acceptance pass remain before release.
 
 Manual acceptance: score on both devices; verify each reaches the same score; try long holds without triggering double taps; test deuce under both rules; correct a game/set-winning point; test both celebration durations and confirmation; suspend/relaunch each app; disconnect/reconnect the Watch; inspect the smallest supported Watch size.

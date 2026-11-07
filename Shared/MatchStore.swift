@@ -19,7 +19,7 @@ final class MatchStore: NSObject, ObservableObject, WCSessionDelegate {
     @Published var connectionMessage: String?
     private let key = "padel.snapshot.v1"
     private var timer: Timer?
-    var active: Match? { snapshot.matches.first { $0.phase != .finished } }
+    var active: Match? { snapshot.matches.first { !$0.isOver } }
     override init() {
         snapshot = UserDefaults.standard.data(forKey: key).flatMap { try? JSONDecoder().decode(Snapshot.self, from: $0) } ?? Snapshot()
         super.init()
@@ -38,6 +38,15 @@ final class MatchStore: NSObject, ObservableObject, WCSessionDelegate {
         guard active == nil else { return }
         snapshot.matches.insert(Match(teams: teams, rule: rule), at: 0); persist()
     }
+    #if os(iOS)
+    func stop(_ id: UUID) {
+        guard let index = snapshot.matches.firstIndex(where: { $0.id == id }) else { return }
+        snapshot.matches[index].stop(); persist()
+    }
+    func delete(_ id: UUID) {
+        snapshot.matches.removeAll { $0.id == id }; persist()
+    }
+    #endif
     func settings(_ preferences: Preferences) { snapshot.preferences = preferences; persist() }
     func command(_ action: String, team: Int = 0, matchID: UUID? = nil) {
         guard let id = matchID ?? active?.id else { return }
@@ -69,7 +78,7 @@ final class MatchStore: NSObject, ObservableObject, WCSessionDelegate {
         persist()
     }
     private func tick() {
-        guard let index = snapshot.matches.firstIndex(where: { $0.phase != .finished }) else { return }
+        guard let index = snapshot.matches.firstIndex(where: { !$0.isOver }) else { return }
         let before = snapshot.matches[index]
         snapshot.matches[index].advance(preferences: snapshot.preferences)
         if before != snapshot.matches[index] { persist() }

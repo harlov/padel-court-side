@@ -21,7 +21,7 @@ public struct Score: Codable, Equatable, Sendable {
     public var tieBreak = false
     public init() {}
 }
-public enum MatchPhase: String, Codable, Sendable { case points, pointCelebration, gamesCelebration, awaitingConfirmation, finished }
+public enum MatchPhase: String, Codable, Sendable { case points, pointCelebration, gamesCelebration, awaitingConfirmation, finished, stopped = "stoped" }
 public struct Match: Codable, Identifiable, Equatable, Sendable {
     public var id = UUID()
     public var started = Date()
@@ -35,6 +35,11 @@ public struct Match: Codable, Identifiable, Equatable, Sendable {
     public var winningPoints = [0, 0]
     public var winningTieBreak = false
     public init(teams: [Team], rule: DeuceRule) { self.teams = teams; self.rule = rule }
+    public var isOver: Bool { phase == .finished || phase == .stopped }
+    public mutating func stop(now: Date = Date()) {
+        guard !isOver else { return }
+        phase = .stopped; ended = now; phaseStarted = now
+    }
     public var setsWon: [Int] { [0, 1].map { team in score.sets.filter { $0[team] > $0[1-team] }.count } }
     public func pointLabel(_ team: Int) -> String {
         let p = phase == .pointCelebration ? winningPoints : score.points
@@ -53,7 +58,7 @@ public struct Match: Codable, Identifiable, Equatable, Sendable {
     }
     // Replaying the point log makes a correction restore games, tie-breaks and sets too.
     public mutating func removePoint(from team: Int, now: Date = Date()) {
-        guard let index = history.lastIndex(of: team) else { return }
+        guard phase != .stopped, let index = history.lastIndex(of: team) else { return }
         history.remove(at: index)
         score = Score()
         for point in history { _ = apply(point) }

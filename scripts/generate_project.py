@@ -11,11 +11,12 @@ def quote(s): return '"' + s.replace('"', '\\"') + '"'
 core = ['Sources/PadelCore/Match.swift', 'Shared/MatchStore.swift', 'Shared/Scoreboard.swift']
 files = core + ['iPhone/PadelApp.swift', 'Watch/PadelWatchApp.swift']
 refs = {p: add(p, 'PBXFileReference', f'lastKnownFileType = sourcecode.swift; path = {quote(p)}; sourceTree = SOURCE_ROOT;') for p in files}
+assets = {name: add(directory+'/Assets.xcassets', 'PBXFileReference', f'lastKnownFileType = folder.assetcatalog; path = {directory}/Assets.xcassets; sourceTree = SOURCE_ROOT;') for name, directory in [('PadelScore', 'iPhone'), ('PadelWatch', 'Watch')]}
 products = {}
 for target in ['PadelScore', 'PadelWatch']:
     products[target] = add(target+'product', 'PBXFileReference', f'explicitFileType = wrapper.application; path = {target}.app; sourceTree = BUILT_PRODUCTS_DIR;')
 products_group = add('products', 'PBXGroup', f'children = {arr(products.values())}; name = Products; sourceTree = "<group>";')
-main = add('main', 'PBXGroup', f'children = {arr(list(refs.values())+[products_group])}; sourceTree = "<group>";')
+main = add('main', 'PBXGroup', f'children = {arr(list(refs.values())+list(assets.values())+[products_group])}; sourceTree = "<group>";')
 def configurations(name, settings):
     configs=[]
     for mode in ['Debug', 'Release']:
@@ -35,8 +36,9 @@ for name, source, watch in [('PadelScore','iPhone/PadelApp.swift',False),('Padel
     builds=[add(name+p,'PBXBuildFile',f'fileRef = {refs[p]};') for p in core+[source]]
     sources=add(name+'sources','PBXSourcesBuildPhase',f'buildActionMask = 2147483647; files = {arr(builds)}; runOnlyForDeploymentPostprocessing = 0;')
     frameworks=add(name+'frameworks','PBXFrameworksBuildPhase','buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;')
-    resources=add(name+'resources','PBXResourcesBuildPhase','buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;')
-    settings={'PRODUCT_NAME':'$(TARGET_NAME)', 'PRODUCT_BUNDLE_IDENTIFIER':'com.courtside.padelscore'+('.watchkitapp' if watch else ''), 'GENERATE_INFOPLIST_FILE':'YES','MARKETING_VERSION':'1.0','CURRENT_PROJECT_VERSION':'1','TARGETED_DEVICE_FAMILY':'4' if watch else '1','SDKROOT':'watchos' if watch else 'iphoneos','SUPPORTED_PLATFORMS':'watchos watchsimulator' if watch else 'iphoneos iphonesimulator','INFOPLIST_KEY_CFBundleDisplayName':'Court Side', 'SWIFT_EMIT_LOC_STRINGS':'YES'}
+    asset_build = add(name+'assets', 'PBXBuildFile', f'fileRef = {assets[name]};')
+    resources=add(name+'resources','PBXResourcesBuildPhase',f'buildActionMask = 2147483647; files = ({asset_build},); runOnlyForDeploymentPostprocessing = 0;')
+    settings={'ASSETCATALOG_COMPILER_APPICON_NAME':'AppIcon', 'PRODUCT_NAME':'$(TARGET_NAME)', 'PRODUCT_BUNDLE_IDENTIFIER':'com.courtside.padelscore'+('.watchkitapp' if watch else ''), 'GENERATE_INFOPLIST_FILE':'YES','MARKETING_VERSION':'1.0','CURRENT_PROJECT_VERSION':'1','TARGETED_DEVICE_FAMILY':'4' if watch else '1','SDKROOT':'watchos' if watch else 'iphoneos','SUPPORTED_PLATFORMS':'watchos watchsimulator' if watch else 'iphoneos iphonesimulator','INFOPLIST_KEY_CFBundleDisplayName':'Court Side', 'SWIFT_EMIT_LOC_STRINGS':'YES'}
     if watch:
         settings.update({'WATCHOS_DEPLOYMENT_TARGET':'10.0','INFOPLIST_KEY_WKCompanionAppBundleIdentifier':'com.courtside.padelscore','INFOPLIST_KEY_WKApplication':'YES'})
     else:

@@ -58,6 +58,34 @@ final class MatchTests: XCTestCase {
         XCTAssertEqual(m.phase, .awaitingConfirmation)
         m.confirm(); XCTAssertEqual(m.phase, .points)
     }
+    func testStoppedMatchPreservesScoreAndRejectsFurtherScoring() throws {
+        var m = match()
+        game(&m, 0); point(&m, 1)
+        let score = m.score
+        let history = m.history
+        let end = Date()
+        m.stop(now: end)
+        XCTAssertEqual(m.phase.rawValue, "stoped")
+        XCTAssertTrue(m.isOver)
+        XCTAssertEqual(m.ended, end)
+        m.addPoint(to: 0); m.removePoint(from: 0)
+        m.confirm(); m.advance(now: end.addingTimeInterval(30), preferences: Preferences())
+        m.stop(now: end.addingTimeInterval(60))
+        XCTAssertEqual(m.score, score)
+        XCTAssertEqual(m.history, history)
+        XCTAssertEqual(m.ended, end)
+        XCTAssertEqual(m.phase, .stopped)
+        XCTAssertEqual(try JSONDecoder().decode(Match.self, from: JSONEncoder().encode(m)), m)
+    }
+    func testStopDuringGameCelebration() {
+        var m = match()
+        for _ in 0..<4 { m.addPoint(to: 0) }
+        m.stop()
+        m.advance(now: Date().addingTimeInterval(60), preferences: Preferences())
+        XCTAssertEqual(m.phase, .stopped)
+        XCTAssertEqual(m.score.games, [1, 0])
+        XCTAssertNil(m.score.winner)
+    }
     func testCorrectionAndCodable() throws {
         var m = match(); point(&m, 0); point(&m, 1); point(&m, 0)
         m.removePoint(from: 1); XCTAssertEqual(m.score.points, [2, 0])

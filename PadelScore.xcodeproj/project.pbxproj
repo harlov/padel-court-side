@@ -16,6 +16,8 @@
 		B654E7AED34415FC2BE2270B /* Shared/MatchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9933291B4A1A21AAB98D1A4D /* Shared/MatchStore.swift */; };
 		B95D7EB5F07DC3CD67C6AA6D /* Sources/PadelCore/Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */; };
 		DAF8F452D4E6D178BE95F1BF /* Shared/Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */; };
+		E6A141CA5FB5FCFBA2346198 = {isa = PBXBuildFile; fileRef = 8AE95870D0B364FCE6E76B8B; };
+		B04AE059CACD660DD2BFB058 = {isa = PBXBuildFile; fileRef = AC5F26DE43DDE3F7B805F606; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/Scoreboard.swift; sourceTree = SOURCE_ROOT; };
 		BEFC4AC8F5A0AAAFB8D01B92 /* PadelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = PadelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/PadelCore/Match.swift; sourceTree = SOURCE_ROOT; };
+		8AE95870D0B364FCE6E76B8B = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = iPhone/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		AC5F26DE43DDE3F7B805F606 = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Watch/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 		B28B7AF69320201D1CF206EB = {
 			isa = PBXGroup;
 			children = (
+				AC5F26DE43DDE3F7B805F606,
+				8AE95870D0B364FCE6E76B8B,
 				D82BA3591953198AFB7BFAAE /* Sources/PadelCore/Match.swift */,
 				9933291B4A1A21AAB98D1A4D /* Shared/MatchStore.swift */,
 				B65745A9F5525C8747D05B94 /* Shared/Scoreboard.swift */,
@@ -162,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6A141CA5FB5FCFBA2346198,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04AE059CACD660DD2BFB058,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +219,7 @@
 		25A9DDB8E7FEE40313CB021F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4S2X8MA45;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -233,6 +242,7 @@
 		5A9F07A86BEF733873282A77 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4S2X8MA45;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -265,6 +275,7 @@
 		963B0DFC175B6AADD5EE50C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4S2X8MA45;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -297,6 +308,7 @@
 		FD5975BCFA99D02609F29317 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4S2X8MA45;
 				GENERATE_INFOPLIST_FILE = YES;

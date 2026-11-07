@@ -28,6 +28,7 @@ struct HomeView: View {
                                 Text("Return to court →").foregroundStyle(.secondary)
                             }.frame(maxWidth: .infinity, alignment: .leading).padding(22).background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 22))
                         }
+                        DeleteMatchButton(matchID: match.id)
                     } else {
                         Button { newMatch = true } label: {
                             HStack { Image(systemName: "plus"); Text("Start a new match"); Spacer(); Image(systemName: "arrow.up.right") }
@@ -35,7 +36,7 @@ struct HomeView: View {
                         }
                     }
                     Text("MATCH HISTORY").font(.caption.bold()).tracking(2).foregroundStyle(.secondary)
-                    let finished = store.snapshot.matches.filter { $0.phase == .finished }
+                    let finished = store.snapshot.matches.filter { $0.isOver }
                     if finished.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Image(systemName: "tennis.racket").font(.largeTitle).foregroundStyle(.mint)
@@ -46,17 +47,20 @@ struct HomeView: View {
                     ForEach(finished) { match in
                         NavigationLink { MatchDetail(match: match) } label: {
                             VStack(alignment: .leading, spacing: 12) {
+                                if match.phase == .stopped { Text("stoped").font(.caption.bold()).foregroundStyle(.orange) }
                                 Text(match.started.formatted(date: .abbreviated, time: .shortened)).font(.caption).foregroundStyle(.secondary)
                                 ForEach(0..<2) { team in
                                     HStack {
                                         Circle().fill(match.teams[team].background).frame(width: 10, height: 10)
                                         Text(match.teams[team].name).fontWeight(match.score.winner == team ? .bold : .regular)
                                         Spacer()
+                                        if match.phase == .stopped { Text("\(match.score.games[team]) (\(match.pointLabel(team)))").monospacedDigit() }
                                         ForEach(Array(match.score.sets.enumerated()), id: \.offset) { _, set in Text("\(set[team])").monospacedDigit() }
                                     }
                                 }
                             }.padding(20).background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 18))
                         }.buttonStyle(.plain)
+                        DeleteMatchButton(matchID: match.id)
                     }
                 }.padding(24)
             }
@@ -134,6 +138,7 @@ struct SettingsView: View {
     }
 }
 struct MatchScreen: View {
+    @State private var confirmStop = false
     @EnvironmentObject var store: MatchStore
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -150,23 +155,66 @@ struct MatchScreen: View {
                         }.frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }
-                Button { dismiss() } label: { Label("Matches", systemImage: "xmark.circle.fill").font(.caption).padding(8) }.tint(.white)
+                HStack {
+                    if let match = store.snapshot.matches.first {
+                        if !match.isOver {
+                            Button("Завершить матч", role: .destructive) { confirmStop = true }
+                                .font(.caption).padding(8)
+                        }
+                        DeleteMatchButton(matchID: match.id) { dismiss() }
+                    }
+                    Spacer()
+                    Button { dismiss() } label: { Label("Matches", systemImage: "xmark.circle.fill").font(.caption).padding(8) }.tint(.white)
+                }
             }.background(.black)
-        }.onAppear { UIApplication.shared.isIdleTimerDisabled = true }
+        }
+        .alert("Завершить матч досрочно?", isPresented: $confirmStop) {
+            Button("Продолжить", role: .cancel) {}
+            Button("Завершить матч", role: .destructive) {
+                if let match = store.snapshot.matches.first { store.stop(match.id) }
+                dismiss()
+            }
+        } message: {
+            Text("Матч сохранится в истории с текущим счётом и статусом «stoped».")
+        }
+        .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
             .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
     }
 }
 struct MatchDetail: View {
+    @Environment(\.dismiss) var dismiss
     let match: Match
     var body: some View {
         List {
             Section(match.started.formatted(date: .abbreviated, time: .shortened)) {
-                Text("\(match.teams[match.score.winner ?? 0].name) won").font(.title2.bold())
+                if match.phase == .stopped {
+                    Text("stoped").font(.title2.bold()).foregroundStyle(.orange)
+                    LabeledContent("Games", value: "\(match.score.games[0]) – \(match.score.games[1])")
+                    LabeledContent("Points", value: "\(match.pointLabel(0)) – \(match.pointLabel(1))")
+                } else if let winner = match.score.winner {
+                    Text("\(match.teams[winner].name) won").font(.title2.bold())
+                }
                 ForEach(Array(match.score.sets.enumerated()), id: \.offset) { index, set in
                     LabeledContent("Set \(index + 1)", value: "\(set[0]) – \(set[1])")
                 }
                 LabeledContent("Rule", value: match.rule == .golden ? "Golden point" : "Advantages")
             }
+            Section { DeleteMatchButton(matchID: match.id) { dismiss() } }
         }.navigationTitle("Match result")
+    }
+}
+
+struct DeleteMatchButton: View {
+    @EnvironmentObject var store: MatchStore
+    let matchID: UUID
+    var onDelete: () -> Void = {}
+    @State private var confirmDelete = false
+    var body: some View {
+        Button("delete", systemImage: "trash", role: .destructive) { confirmDelete = true }
+            .font(.caption)
+            .alert("Удалить матч?", isPresented: $confirmDelete) {
+                Button("Отмена", role: .cancel) {}
+                Button("delete", role: .destructive) { store.delete(matchID); onDelete() }
+            } message: { Text("Матч и его счёт будут удалены из истории на телефоне и часах.") }
     }
 }
